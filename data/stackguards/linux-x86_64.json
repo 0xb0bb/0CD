@@ -1,0 +1,4 @@
+{
+	"src": "fsbase",
+	"struct": "struct __packed { void *tcb; void *dtv; void *self; int multiple_threads; int gscope_flag; uintptr_t sysinfo; uintptr_t stack_guard; uintptr_t pointer_guard; unsigned long int vgetcpu_cache[2]; unsigned int feature_1; void *__private_tm[4]; void *__private_ss; unsigned long long int ssp_base; };"
+}
