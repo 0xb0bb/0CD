@@ -38,21 +38,6 @@ class ArchHandler(ABC):
             for xref in self.bv.get_code_refs(sym.address):
                 yield xref.function
 
-    def clean_function(self, function: Function) -> bool:
-        changed_tcb = self.set_tcb_struct(function)
-        if changed_tcb:
-            self.bv.update_analysis_and_wait()
-            log_debug(
-                f'[+] Updated stack guard type in function {function.name}')
-
-        changed_guard = self.set_guard_name(function)
-        if changed_guard:
-            self.bv.update_analysis_and_wait()
-            log_debug(
-                f'[+] Updated stack guard variable name in function {function.name}')  # noqa: E501
-
-        return changed_tcb or changed_guard
-
     def set_guard_name(self, function) -> bool:
         log_debug(f'[*] Cleaning guard name for {function.name}')  # noqa: E501
         instrs = (ins for ins in function.mlil.instructions if ins.operation ==
